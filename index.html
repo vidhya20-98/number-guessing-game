@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: aqua;
+            background-color: white
+        }
+        #content{
+            position: absolute;
+            top: 37%;
+            left: 40%;
+        }
+        .button{
+            height: 50px;
+            width: 110px;
+            background-color: greenyellow;
+            text-align: center;
+            border-radius: 20px;
+            margin-left: 43%;
+            margin-top: 20px;
+        }
+        #winner{
+            color: blue;
+
+        }
+        
+    </style>
+</head>
+<body>
+    <div><h1 id="winner"></h1></div>
+    <button type="button" class="button" id="new">NEW GAME</button><br>
+    <button type="button" class="button" id="nxtgame">NEXT CHANCE</button>
+    <div id="content">
+    <input class="box" type="text" id="1">&ensp;
+    <input class="box" type="text" id="2">&ensp;
+    <input class="box" type="text" id="3">&ensp;
+    <input class="box" type="text" id="4"><br><br>
+    <input class="box" type="text" id="5">&ensp;
+    <input class="box" type="text" id="6">&ensp;
+    <input class="box" type="text" id="7">&ensp;
+    <input class="box" type="text" id="8"><br><br>
+    <input class="box" type="text" id="9">&ensp;
+    <input class="box" type="text" id="10">&ensp;
+    <input class="box" type="text" id="11">&ensp;
+    <input class="box" type="text" id="12"><br><br>
+    <input class="box" type="text" id="13">&ensp;
+    <input class="box" type="text" id="14">&ensp;
+    <input class="box" type="text" id="15">&ensp;
+    <input class="box" type="text" id="16"><br><br>
+    <input class="box" type="text" id="17">&ensp;
+    <input class="box" type="text" id="18">&ensp;
+    <input class="box" type="text" id="19">&ensp;
+    <input class="box" type="text" id="20"><br><br>
+    
+    </div>
+    <script>
+    var id,count,inputNo,temp;
+    var tempRandom,compRandom;
+    var flag;
+    init();
+    function conditionChecking(){
+        temp = tempInput;
+        if( temp == compRandom){
+          document.getElementById("winner").textContent="WINNER congratulations!";
+            flag = false;
+            for(var z=id ; z>= id-4 ; z--){
+            document.getElementById(z).style.backgroundColor = "green";
+        }
+        }
+    if(flag){
+    var c1,c2,c3,c4,i1,i2,i3,i4;
+    c1 = compRandom % 10;
+    compRandom = Math.floor(compRandom/10);
+	c2 = compRandom % 10;
+	compRandom = Math.floor(compRandom/10);
+	c3 = compRandom % 10;
+	compRandom = Math.floor(compRandom/10);
+	c4 = compRandom % 10;
+    i1 = temp % 10;
+    temp = Math.floor(temp/10);
+    i2 = temp % 10;
+    temp = Math.floor(temp/10);
+    i3 = temp % 10;
+    temp = Math.floor(temp/10);
+    i4 = temp % 10;
+   
+    
+    if( i1 == c1 ){
+        document.getElementById(id).style.backgroundColor = "green";
+    }else if( i1 == c2 || i1 == c3 || i1 == c4){
+        document.getElementById(id).style.backgroundColor = "blue";
+    }else {
+        document.getElementById(id).style.backgroundColor = "red";
+    }
+    id = id - 1;
+    if( i2 == c2 ){
+        document.getElementById(id).style.backgroundColor = "green";
+    }else if( i2 == c1 || i2 == c3 || i2 == c4){
+        document.getElementById(id).style.backgroundColor = "blue";
+    }else {
+        document.getElementById(id).style.backgroundColor = "red";
+    }
+    id = id - 1;
+    if( i3 == c3 ){
+        document.getElementById(id).style.backgroundColor = "green";
+    }else if( i3 == c2 || i3 == c1 || i3 == c4){
+        document.getElementById(id).style.backgroundColor = "blue";
+    }else {
+        document.getElementById(id).style.backgroundColor = "red";
+    }
+    id = id - 1;
+    if( i4 == c4 ){
+        document.getElementById(id).style.backgroundColor = "green";
+    }else if( i4 == c2 || i4 == c3 || i4 == c1){
+        document.getElementById(id).style.backgroundColor = "blue";
+    }else {
+        document.getElementById(id).style.backgroundColor = "red";
+    }
+    
+    compRandom = tempRandom;
+        }
+        
+    }
+    function init(){
+         for(var i=1;i<=16;i++){
+        document.getElementById(i).value = " ";
+        document.getElementById(i).style.backgroundColor = "white";
+    }
+    flag= true;
+    }
+    document.getElementById("new").addEventListener("click", function(){
+        document.getElementById("winner").textContent=" ";
+    init();
+    id=4;
+    count=1;
+    compRandom = Math.floor(Math.random() * 10000) + 1;
+    console.log(compRandom);
+    inputNo=prompt("Enter the Number");
+    temp = tempInput = inputNo;
+    tempRandom = compRandom;
+  
+    while(inputNo>=1){
+    	document.getElementById(id).value = Math.floor(inputNo % 10);
+    	inputNo /= 10;
+    	id-=1
+    }
+    id = 4
+    conditionChecking();
+    compRandom = tempRandom;
+    console.log("Final compRandom",compRandom)
+    });
+        
+    
+    document.getElementById("nxtgame").addEventListener("click", function(){
+        if(flag){
+    console.log("Before changing",id);
+    count += 1; 
+    if(count == 2){
+        id = 8;
+    }else if(count == 3){
+        id = 12;
+    }else if(count == 4){
+        id = 16;
+    }else if(count == 5){
+        id = 20;
+    }
+    idtemp = id;
+    console.log("After changing",id);
+   
+    var inputNo=prompt("Enter the Number");
+    var temp =tempInput = inputNo;
+  
+    while(inputNo>=1){
+    	document.getElementById(id).value = Math.floor(inputNo % 10);
+    	inputNo /= 10;
+    	id-=1
+    }
+    id = idtemp;
+    console.log("NextChance Before",compRandom);
+    conditionChecking();
+    
+    console.log("NextChance After",compRandom);
+        }
+    });  
+    
+    </script>
+    
+</body>
+</html>
